@@ -60,6 +60,7 @@ create table events(
 create table event_participants(
     eventid int,
     pid int,
+    primary key (eventid, pid),
     foreign key (eventid) references events(eventid),
     foreign key (pid) references participants(pid)
 );
@@ -67,6 +68,7 @@ create table event_participants(
 create table event_volunteers(
     eventid int,
     roll varchar(10),
+    primary key (eventid, roll),
     foreign key (eventid) references events(eventid),
     foreign key (roll) references students(roll)
 );
@@ -74,6 +76,7 @@ create table event_volunteers(
 create table event_organizers(
     eventid int,
     oid int,
+    primary key (eventid, oid),
     foreign key (eventid) references events(eventid),
     foreign key (oid) references organizers(oid)
 );
@@ -82,6 +85,7 @@ create table event_winners(
     eventid int,
     pid int,
     position int,
+    primary key (eventid, pid),
     foreign key (eventid) references events(eventid),
     foreign key (pid) references participants(pid)
 );
@@ -89,6 +93,7 @@ create table event_winners(
 create table student_participants(
     roll varchar(10),
     pid int,
+    primary key (roll, pid),
     foreign key (roll) references students(roll),
     foreign key (pid) references participants(pid)
 );
