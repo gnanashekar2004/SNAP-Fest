@@ -6,6 +6,8 @@ import college_router from './routes/college_routes';
 import studentRouter from './routes/student_routes';
 import eventRouter from './routes/event_routes';
 import adminRouter from './routes/admin_routes';
+import participantRouter from './routes/participant_routes';
+import organizerRouter from './routes/organizer_routes';
 
 const app = express();
 
@@ -22,7 +24,8 @@ app.use("/colleges", college_router);
 app.use("/students", studentRouter);
 app.use("/events", eventRouter);
 app.use("/admins", adminRouter);
-
+app.use("/participants", participantRouter);
+app.use("/organizers", organizerRouter);
 
 // running sever
 const port = process.env.PORT || 5001;

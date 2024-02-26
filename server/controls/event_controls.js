@@ -41,7 +41,7 @@ export const getEventByID = async(req, res, next) => {
         client.release();
     }
     if(!result){
-        return res.status(310).json({message:"Invalid college id"});
+        return res.status(310).json({message:"Invalid data"});
     }
     return res.status(200).json(result.rows);
 };
