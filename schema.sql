@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS students, colleges,halls, participants, events,organizers, adm, eventorganizers, eventparticipants, eventvolunteers, eventwinners,student_participants CASCADE;
+DROP TABLE IF EXISTS students, colleges,halls, participants, events,organizers, adm, event_organizers, event_participants, event_volunteers, event_winners,student_participants CASCADE;
 
 
 create table colleges(
@@ -102,6 +102,8 @@ insert into halls values (2, 'MMM');
 insert into halls values (3, 'LLR');
 insert into halls values (4, 'MT');
 insert into halls values (5, 'SNIG');
+insert into halls values (6, 'NEHRU');
+insert into halls values (7, 'RP');
 
 -- adm
 insert into adm values (1, 'admin1', 'password');
@@ -112,3 +114,12 @@ insert into events values (1, 'codathon', '2024-03-01', 'coding event'),
 (3, 'anime-quiz', '2024-03-01', 'quiz'),
 (4, 'debate', '2024-03-01',  'debate'),
 (5, 'techexpo', '2024-03-01',  'tech event');
+
+
+--students
+insert into students values ('21CS10060', 'pavan', 'CSE', 1, '21CS10060'),
+('21CS10040', 'nihith', 'CSE', 2, '21CS10040'),
+('21CS10020', 'anjaneya', 'CSE', 2, '21CS10020'),
+('21CS10052', 'shekar', 'CSE', 6, '21CS10052'),
+('21CS10050', 'mokshith', 'CSE', 7, '21CS10050'),
+('21CS10042', 'harshith', 'CSE', 2, '21CS10042');
