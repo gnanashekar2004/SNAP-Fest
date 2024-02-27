@@ -93,7 +93,12 @@ export const organizeEvent = async(req, res, next)=>{
             return res.status(400).json({message:"undefined data given"});
         }
         await client.query('BEGIN');
-        let queryText = `select * from event_organizers where event_organizers.eventid=${eventid} and event_organizers.oid=${oid}`;
+        let queryText = `select * from organizers where organizers.oid=${oid}`;
+        result = await client.query(queryText);
+        if (result.rows.length == 0){
+            return res.status(404).json({message:"organizer not found"});
+        }
+        queryText = `select * from event_organizers where event_organizers.eventid=${eventid} and event_organizers.oid=${oid}`;
         result = await client.query(queryText);
         if (result.rows.length != 0){
             // already exists
