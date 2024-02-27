@@ -5,7 +5,7 @@ export const getAllAdmins = async(req, res, next) => {
     let result;
     try {
         await client.query('BEGIN');
-        const queryText = 'select * from adm';
+        let queryText = 'select * from adm';
         result = await client.query(queryText);
         
         await client.query('COMMIT');
@@ -29,7 +29,7 @@ export const getAdminByID = async(req, res, next) => {
     let result;
     try{
         await client.query('BEGIN');
-        const queryText = `select * from adm where adm.adminid=${id}`;
+        let queryText = `select * from adm where adm.adminid=${id}`;
         result = await client.query(queryText);
         
         await client.query('COMMIT');

@@ -5,7 +5,7 @@ export const getAllParticipants = async(req, res, next)=>{
     let result;
     try {
         await client.query('BEGIN');
-        const queryText = 'select * from participants';
+        let queryText = 'select * from participants';
         result = await client.query(queryText);
         
         await client.query('COMMIT');
@@ -29,7 +29,7 @@ export const getParticipantByID = async(req, res, next) => {
     let result;
     try{
         await client.query('BEGIN');
-        const queryText = `select * from participants where participants.pid=${id}`;
+        let queryText = `select * from participants where participants.pid=${id}`;
         result = await client.query(queryText);
         
         await client.query('COMMIT');
@@ -108,3 +108,38 @@ export const createParticipant = async(req, res, next)=>{
     return res.status(200).json(result);
 };
 
+export const registerAsParticipant = async(req, res, next)=>{
+    const { pid, eventid } = req.body;
+    const client = await pool.connect();
+    let result;
+    try{
+        if (pid == undefined || eventid==undefined){
+            return res.status(400).json({message:"undefined data given"});
+        }
+        await client.query('BEGIN');
+        let queryText = `select * from event_participants where event_participants.eventid=${eventid} and event_participants.pid=${pid}`;
+        result = await client.query(queryText);
+        if (result.rows.length != 0){
+            // already exists
+            return res.status(500).json({message:"Already exists"});
+        }
+        else {
+            // ok
+            queryText = `insert into event_participants values(${eventid}, ${pid})`;
+            result = await client.query(queryText);
+        }
+
+        await client.query('COMMIT');
+    }catch(e){
+        await client.query('ROLLBACK');
+        console.log(e);
+    }
+    finally{
+        client.release();
+    }
+    if(!result){
+        return res.status(310).json({message:"invalid data"});
+    }
+    result = `${pid} - ${eventid}`;
+    return res.status(200).json(result);
+};

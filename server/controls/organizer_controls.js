@@ -5,7 +5,7 @@ export const getAllOrganizers = async(req, res, next)=>{
     let result;
     try {
         await client.query('BEGIN');
-        const queryText = 'select * from organizers';
+        let queryText = 'select * from organizers';
         result = await client.query(queryText);
         
         await client.query('COMMIT');
@@ -29,7 +29,7 @@ export const getOrganizerByID = async(req, res, next) => {
     let result;
     try{
         await client.query('BEGIN');
-        const queryText = `select * from organizers where organizers.oid=${id}`;
+        let queryText = `select * from organizers where organizers.oid=${id}`;
         result = await client.query(queryText);
         
         await client.query('COMMIT');

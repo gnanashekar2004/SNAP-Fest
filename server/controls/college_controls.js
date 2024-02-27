@@ -5,7 +5,7 @@ export const getAllColleges = async(req, res, next) => {
     let result;
     try {
         await client.query('BEGIN');
-        const queryText = 'select * from colleges';
+        let queryText = 'select * from colleges';
         result = await client.query(queryText);
         
         await client.query('COMMIT');
@@ -29,7 +29,7 @@ export const getCollegeByID = async(req, res, next) => {
     let result;
     try{
         await client.query('BEGIN');
-        const queryText = `select * from colleges where colleges.collegeid=${id}`;
+        let queryText = `select * from colleges where colleges.collegeid=${id}`;
         result = await client.query(queryText);
         
         await client.query('COMMIT');
