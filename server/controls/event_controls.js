@@ -120,3 +120,66 @@ export const getEventParticipants = async(req, res, next) => {
     }
     return res.status(200).json(result.rows);
 };
+
+export const addEvent = async(req, res, next)=>{
+    const {id, name, dateofevent, location, description } = req.body;
+    const client = await pool.connect();
+    let result;
+    try{
+        await client.query('BEGIN');
+        if (id == undefined || name == undefined || dateofevent == undefined|| location==undefined || description==undefined){
+            return res.status(400).json({message:"undefined data given"});
+        }
+        let queryText = `select * from events where events.id=${id}`;
+        result = await client.query(queryText);
+
+        if (result.rows.length != 0){
+            // already eventid exists
+            return res.status(500).json({message:"eventid exists already"});
+        }
+        else {
+            queryText = `insert into events values (${id}, '${name}', '${dateofevent}', '${location}', '${description}')`;
+            result = await client.query(queryText);
+        }
+        
+        await client.query('COMMIT');
+    }catch(e){
+        await client.query('ROLLBACK');
+        console.log(e);
+    }
+    finally{
+        client.release();
+    }
+    if(!result){
+        return res.status(310).json({message:"Invalid data"});
+    }
+    result = `success`;
+    return res.status(200).json(result);
+};
+
+export const deleteEvent = async(req, res, next)=>{
+    const {id} = req.body;
+    const client = await pool.connect();
+    let result;
+    try{
+        await client.query('BEGIN');
+        if (id == undefined ){
+            return res.status(400).json({message:"undefined data given"});
+        }
+        let queryText = `delete from events where events.id=${id}`;
+        result = await client.query(queryText);
+        
+        await client.query('COMMIT');
+    }catch(e){
+        await client.query('ROLLBACK');
+        console.log(e);
+    }
+    finally{
+        client.release();
+    }
+    if(!result){
+        return res.status(310).json({message:"Invalid data"});
+    }
+    result = `success`;
+    return res.status(200).json(result);
+};

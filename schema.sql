@@ -240,14 +240,14 @@ create table event_volunteers(
 	eventid int,
 	studentid int,
 	primary key(eventid, studentid),
-	foreign key(eventid) references events(id),
+	foreign key(eventid) references events(id) on delete cascade,
 	foreign key(studentid) references students(id) on delete cascade
 );
 create table event_orgs(
 	eventid int,
 	orgid int,
 	primary key(eventid, orgid),
-	foreign key(eventid) references events(id),
+	foreign key(eventid) references events(id) on delete cascade,
 	foreign key(orgid) references orgs(id) on delete cascade
 );
 create table event_winners(
@@ -255,14 +255,14 @@ create table event_winners(
 	pid int,
 	position int,
 	primary key(eventid, pid),
-	foreign key(eventid) references events(id),
+	foreign key(eventid) references events(id) on delete cascade,
 	foreign key(pid) references part(id) on delete cascade
 );
 create table event_parts(
 	eventid int,
 	pid int,
 	primary key(eventid, pid),
-	foreign key(eventid) references events(id),
+	foreign key(eventid) references events(id) on delete cascade,
 	foreign key(pid) references part(id) on delete cascade
 );
 
