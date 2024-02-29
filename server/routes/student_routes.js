@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllStudents, getStudentByID, registerAsVolunteer, registerForEvent } from '../controls/student_controls';
+import { DeregisterAsVolunteer, getAllStudents, getStudentByID, loginStudent, registerAsVolunteer} from '../controls/student_controls';
 
 const studentRouter = express.Router();
 
@@ -7,6 +7,8 @@ studentRouter.get("/", getAllStudents);
 
 studentRouter.get("/:id", getStudentByID);
 studentRouter.put("/volunteer", registerAsVolunteer);
-studentRouter.put("/register", registerForEvent);
+studentRouter.delete("/volunteer", DeregisterAsVolunteer);
+studentRouter.put("/login", loginStudent);
+// studentRouter.put("/register", registerForEvent);
 
 export default studentRouter;
