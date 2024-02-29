@@ -1,4 +1,4 @@
--- DROP TABLE IF EXISTS students, colleges,halls, participants, events,organizers, adm, event_organizers, event_participants, event_volunteers, event_winners,student_participants CASCADE;
+DROP TABLE IF EXISTS students,halls, orgs, events,ext_part, part,admininfo, event_organizers, event_parts, event_volunteers, event_winners CASCADE;
 
 
 -- create table colleges(
