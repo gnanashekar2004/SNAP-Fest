@@ -29,7 +29,7 @@ export const getEventByID = async(req, res, next) => {
     let result;
     try{
         await client.query('BEGIN');
-        let queryText = `select * from events where events.eventid=${id}`;
+        let queryText = `select * from events where events.id=${id}`;
         result = await client.query(queryText);
         
         await client.query('COMMIT');
@@ -47,14 +47,14 @@ export const getEventByID = async(req, res, next) => {
 };
 
 export const getEventVolunteers = async(req, res, next) => {
-    const id = req.params.id;
+    const eventid = req.params.id;
     const client = await pool.connect();
     let result;
     try{
         await client.query('BEGIN');
-        let queryText = `select students.roll, students.name from students 
-        join event_volunteers on students.roll=event_volunteers.roll
-        where event_volunteers.eventid=${id}`;
+        let queryText = `select students.id, students.name from students 
+        join event_volunteers on students.id=event_volunteers.studentid
+        where event_volunteers.eventid=${eventid}`;
         result = await client.query(queryText);
         
         await client.query('COMMIT');
@@ -72,14 +72,14 @@ export const getEventVolunteers = async(req, res, next) => {
 };
 
 export const getEventWinners = async(req, res, next) => {
-    const id = req.params.id;
+    const eventid = req.params.id;
     const client = await pool.connect();
     let result;
     try{
         await client.query('BEGIN');
-        let queryText = `select participants.name from participants
-        join event_winners on participants.pid=event_winners.pid
-        where event_winners.eventid=${id}`;
+        let queryText = `select part.name from part
+        join event_winners on part.id=event_winners.pid
+        where event_winners.eventid=${eventid}`;
         result = await client.query(queryText);
         
         await client.query('COMMIT');
@@ -102,9 +102,9 @@ export const getEventParticipants = async(req, res, next) => {
     let result;
     try{
         await client.query('BEGIN');
-        let queryText = `select participants.pid, participants.name from participants
-        join event_participants on participants.pid=event_participants.pid
-        where event_participants.eventid=${id}`;
+        let queryText = `select part.id, part.name from part
+        join event_parts on part.id=event_parts.pid
+        where event_parts.eventid=${id}`;
         result = await client.query(queryText);
         
         await client.query('COMMIT');

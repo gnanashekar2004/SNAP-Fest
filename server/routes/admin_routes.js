@@ -1,13 +1,13 @@
 import express from 'express';
-import { deleteOrganizer, deleteParticipant, deleteStudentFromParticipant, deleteStudentFromVolunteer, getAdminByID, getAllAdmins } from '../controls/admin_controls';
+import { declareWinnersByAdmin, deleteExtParticipant, deleteOrganizer, deleteStudent, getAdminByID, getAllAdmins, loginAdmin } from '../controls/admin_controls';
 
 const adminRouter = express.Router();
 
 adminRouter.get("/", getAllAdmins);
 adminRouter.get("/:id", getAdminByID);
+adminRouter.put("/login", loginAdmin);
 adminRouter.delete("/organizer", deleteOrganizer);
-adminRouter.delete("/participant", deleteParticipant);
-adminRouter.delete("/studentFromParticipant", deleteStudentFromParticipant);
-adminRouter.delete("/studentFromvolunteer", deleteStudentFromVolunteer);
-
+adminRouter.delete("/student", deleteStudent);
+adminRouter.delete("/ext_part", deleteExtParticipant);
+adminRouter.put("/winner", declareWinnersByAdmin);
 export default adminRouter;

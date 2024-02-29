@@ -29,7 +29,7 @@ export const getStudentByID = async(req, res, next) => {
     let result;
     try{
         await client.query('BEGIN');
-        let queryText = `select * from students where students.roll='${id}'`;
+        let queryText = `select * from students where students.id='${id}'`;
         result = await client.query(queryText);
         
         await client.query('COMMIT');
@@ -47,15 +47,20 @@ export const getStudentByID = async(req, res, next) => {
 };
 
 export const registerAsVolunteer = async(req, res, next)=>{
-    const { roll, eventid } = req.body;
+    const { studentid, eventid } = req.body;
     const client = await pool.connect();
     let result;
     try{
-        if (roll == undefined || eventid==undefined){
+        if (studentid == undefined || eventid==undefined){
             return res.status(400).json({message:"undefined data given"});
         }
         await client.query('BEGIN');
-        let queryText = `select * from event_volunteers where event_volunteers.eventid=${eventid} and event_volunteers.roll='${roll}'`;
+        let queryText = `select * from students where students.id=${studentid}`;
+        result = await client.query(queryText);
+        if (result.rows.length == 0){
+            return res.status(404).json({message:"student not found"});
+        }
+        queryText = `select * from event_volunteers where event_volunteers.eventid=${eventid} and event_volunteers.studentid=${studentid}`;
         result = await client.query(queryText);
         if (result.rows.length != 0){
             // already exists
@@ -63,7 +68,7 @@ export const registerAsVolunteer = async(req, res, next)=>{
         }
         else {
             // ok
-            queryText = `insert into event_volunteers values(${eventid}, '${roll}')`;
+            queryText = `insert into event_volunteers(eventid, studentid) values(${eventid}, ${studentid})`;
             result = await client.query(queryText);
         }
 
@@ -78,12 +83,77 @@ export const registerAsVolunteer = async(req, res, next)=>{
     if(!result){
         return res.status(310).json({message:"invalid data"});
     }
-    result = `${roll} - ${eventid}`;
+    result = `${studentid} - ${eventid}`;
     return res.status(200).json(result);
 };
 
+export const DeregisterAsVolunteer = async(req, res, next)=>{
+    const { studentid, eventid } = req.body;
+    const client = await pool.connect();
+    let result;
+    try{
+        if (studentid == undefined || eventid==undefined){
+            return res.status(400).json({message:"undefined data given"});
+        }
+        await client.query('BEGIN');
+        let queryText = `select * from event_volunteers where event_volunteers.studentid=${studentid}`;
+        result = await client.query(queryText);
+        if (result.rows.length == 0){
+            return res.status(404).json({message:"student not found"});
+        }
+        queryText = `delete from event_volunteers where event_volunteers.studentid=${studentid} and event_volunteers.eventid=${eventid}`;
+        result = await client.query(queryText);
+        await client.query('COMMIT');
+    }catch(e){
+        await client.query('ROLLBACK');
+        console.log(e);
+    }
+    finally{
+        client.release();
+    }
+    if(!result){
+        return res.status(310).json({message:"invalid data"});
+    }
+    result = `${studentid} - ${eventid}`;
+    return res.status(200).json(result);
+};
 
-export const registerForEvent = async(req, res, next)=>{
+export const loginStudent = async(req, res, next)=>{
+    const {email, password } = req.body;
+    const client = await pool.connect();
+    let result;
+    try{
+        await client.query('BEGIN');
+        if (email == undefined || password==undefined){
+            return res.status(400).json({message:"undefined data given"});
+        }
+        let queryText = `select * from students where students.email='${email}'`;
+        result = await client.query(queryText);
+        
+        if (result.rows.length == 0){
+            // email doesn't exist
+            return res.status(350).json({message:"email doesn't exist"});
+        }
+        if (result.rows[0].password != password){
+            // password incorrect
+            return res.status(351).json({message:"wrong password"});
+        }
+
+        await client.query('COMMIT');
+    }catch(e){
+        await client.query('ROLLBACK');
+        console.log(e);
+    }
+    finally{
+        client.release();
+    }
+    if(!result){
+        return res.status(310).json({message:"err occured"});
+    }
+    return res.status(200).json(result.rows);
+};
+/*
+export const deleted_registerForEvent = async(req, res, next)=>{
     const { roll, name, hid, password, eventid } = req.body;
     const client = await pool.connect();
     let result;
@@ -145,3 +215,5 @@ export const registerForEvent = async(req, res, next)=>{
     result = `${roll} - ${pid} - ${name} - ${collegeid} - ${hid} - ${password} - ${eventid}`;
     return res.status(200).json(result);
 };
+
+*/
