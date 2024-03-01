@@ -1,0 +1,9 @@
+.eventRows{
+    padding-left:10%;
+    padding-right:10%;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
