@@ -8,13 +8,13 @@ function Student(){
         <>
             <Navbar prop="Profile"/>
             <div className={styles.eventRows}>
-                <Event name="Hackathon" date="25-03-2024" time="16:00:00" button1="Register" button2="Volunteer"/>
-                <Event name="Hackathon" date="25-03-2024" time="16:00:00" button1="Register" button2="Volunteer"/>
-                <Event name="Hackathon" date="25-03-2024" time="16:00:00" button1="Register" button2="Volunteer"/>
-                <Event name="Hackathon" date="25-03-2024" time="16:00:00" button1="Register" button2="Volunteer"/>
-                <Event name="Hackathon" date="25-03-2024" time="16:00:00" button1="Register" button2="Volunteer"/>
-                <Event name="Hackathon" date="25-03-2024" time="16:00:00" button1="Register" button2="Volunteer"/>
-                <Event name="Hackathon" date="25-03-2024" time="16:00:00" button1="Register" button2="Volunteer"/>
+                <Event name="Hackathon" date="25-03-2024" time="16:00:00" desc="" button1="Register" button2="Volunteer"/>
+                <Event name="Hackathon" date="25-03-2024" time="16:00:00" desc="" button1="Register" button2="Volunteer"/>
+                <Event name="Hackathon" date="25-03-2024" time="16:00:00" desc="" button1="Register" button2="Volunteer"/>
+                <Event name="Hackathon" date="25-03-2024" time="16:00:00" desc="" button1="Register" button2="Volunteer"/>
+                <Event name="Hackathon" date="25-03-2024" time="16:00:00" desc="" button1="Register" button2="Volunteer"/>
+                <Event name="Hackathon" date="25-03-2024" time="16:00:00" desc="" button1="Register" button2="Volunteer"/>
+                <Event name="Hackathon" date="25-03-2024" time="16:00:00" desc="" button1="Register" button2="Volunteer"/>
             </div>
         </>
     );

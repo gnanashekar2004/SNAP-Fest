@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Event.module.css";
 
-function Event ({name,date,time,button1,button2}) {
+function Event ({name,date,time,desc,button1,button2}) {
     return (
         <>
             <div className="card w-100 mb-3">
@@ -13,7 +13,8 @@ function Event ({name,date,time,button1,button2}) {
                     {button1 && <button className="btn btn-success" style={{fontSize:"20px"}}>{button1}</button>}
                 </div>
                 </div>
-                <p className="card-text" style={{color: "grey"}}>{date} {time}</p>
+                <p className="card-text" style={{color: "grey"}}>{date} {time} </p>
+                {desc && <p className="card-text" style={{color: "grey"}}>{desc}</p>}
             </div>
             </div>
         </>

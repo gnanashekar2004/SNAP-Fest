@@ -1,7 +1,7 @@
 import react from "react";
 import { useNavigate } from "react-router-dom";
 
-import Card from "./Card";
+import Card from "./card";
 import image1 from "../../assests/participants.png";
 import image2 from "../../assests/student.png";
 import image3 from "../../assests/Organiser.png";
