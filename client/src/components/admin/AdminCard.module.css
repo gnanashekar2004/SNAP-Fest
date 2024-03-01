@@ -1,0 +1,21 @@
+@font-face {
+    font-family: "Meteoric-Bold";
+    src: url("https://db.onlinewebfonts.com/t/82a1a6e5316d84f1b8e2fa22a97e1211.eot");
+    src: url("https://db.onlinewebfonts.com/t/82a1a6e5316d84f1b8e2fa22a97e1211.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/82a1a6e5316d84f1b8e2fa22a97e1211.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/82a1a6e5316d84f1b8e2fa22a97e1211.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/82a1a6e5316d84f1b8e2fa22a97e1211.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/82a1a6e5316d84f1b8e2fa22a97e1211.svg#Meteoric-Bold")format("svg");
+}
+
+.card{
+    height: 200px;
+    width : 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    color: white;
+    font-size: 25px;
+    font-family: "Meteoric-Bold";
+}
