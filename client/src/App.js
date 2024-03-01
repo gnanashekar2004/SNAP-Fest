@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Homepage from './components/homepage/Homepage';
+import Homepage from './components/Homepage/Homepage';
 import Participant from './components/participant/Participant';
 import Student from './components/student/Student';
 import Organizer from './components/organizer/Organizer';

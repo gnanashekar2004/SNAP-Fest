@@ -1,4 +1,4 @@
--- DROP TABLE IF EXISTS students, colleges,halls, participants, events,organizers, adm, event_organizers, event_participants, event_volunteers, event_winners,student_participants CASCADE;
+DROP TABLE IF EXISTS students,halls, orgs, events,ext_part, part,admininfo, event_organizers, event_parts, event_volunteers, event_winners CASCADE;
 
 
 -- create table colleges(
@@ -240,14 +240,14 @@ create table event_volunteers(
 	eventid int,
 	studentid int,
 	primary key(eventid, studentid),
-	foreign key(eventid) references events(id),
+	foreign key(eventid) references events(id) on delete cascade,
 	foreign key(studentid) references students(id) on delete cascade
 );
 create table event_orgs(
 	eventid int,
 	orgid int,
 	primary key(eventid, orgid),
-	foreign key(eventid) references events(id),
+	foreign key(eventid) references events(id) on delete cascade,
 	foreign key(orgid) references orgs(id) on delete cascade
 );
 create table event_winners(
@@ -255,14 +255,14 @@ create table event_winners(
 	pid int,
 	position int,
 	primary key(eventid, pid),
-	foreign key(eventid) references events(id),
+	foreign key(eventid) references events(id) on delete cascade,
 	foreign key(pid) references part(id) on delete cascade
 );
 create table event_parts(
 	eventid int,
 	pid int,
 	primary key(eventid, pid),
-	foreign key(eventid) references events(id),
+	foreign key(eventid) references events(id) on delete cascade,
 	foreign key(pid) references part(id) on delete cascade
 );
 
