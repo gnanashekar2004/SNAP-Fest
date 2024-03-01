@@ -15,7 +15,7 @@ function Participant(){
     
     return (
         <>
-        <Navbar prop="Accomodation"/>
+        <Navbar prop="Profile"/>
         <Box margin={"auto"} marginTop={0}>
             <Typography variant={"h4"} width={"100%"} bgcolor="lightgreen" textAlign={"center"} padding={2}>All Events</Typography>
             <Box width={"80%"} margin="auto" display={"flex"} justifyContent="center" flexWrap={"wrap"}>

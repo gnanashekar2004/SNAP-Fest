@@ -84,7 +84,12 @@ export const createOrganizer = async(req, res, next)=>{
     if(!result){
         return res.status(310).json({message:"invalid data"});
     }
-    result = `${id}-${name}-${email}-${password}`;
+    result = {
+        id:id,
+        name:name,
+        email:email,
+        password:password
+    }
     return res.status(200).json(result);
 };
 

@@ -336,3 +336,5 @@ insert into events values (1, 'codathon', '2024-03-01','CIC', 'coding event'),
 (4, 'debate', '2024-03-01', 'nalanda', 'debate'),
 (5, 'techexpo', '2024-03-01', 'arena', 'tech event');
 
+insert into admininfo values (1, 'admin', 'admin@gmail.com', 'admin');
+

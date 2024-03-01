@@ -7,7 +7,7 @@ export const getAllParticipants = async(req, res, next)=>{
     let result;
     try {
         await client.query('BEGIN');
-        let queryText = 'select * from part';
+        let queryText = 'select * from ext_part';
         result = await client.query(queryText);
         
         await client.query('COMMIT');
@@ -31,7 +31,7 @@ export const getParticipantByID = async(req, res, next) => {
     let result;
     try{
         await client.query('BEGIN');
-        let queryText = `select * from part where part.id=${id}`;
+        let queryText = `select * from ext_part where ext_part.id=${id}`;
         result = await client.query(queryText);
         
         await client.query('COMMIT');
@@ -95,7 +95,13 @@ export const createParticipant = async(req, res, next)=>{
     if(!result){
         return res.status(310).json({message:"invalid data"});
     }
-    result = `${id}-${name}-${email}-${password}`;
+    result = {
+        id: id,
+        name: name,
+        email: email,
+        password: password,
+        college: college
+    }
     return res.status(200).json(result);
 };
 
