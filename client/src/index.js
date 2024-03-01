@@ -2,14 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
+import axios  from 'axios';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { json } from 'react-router-dom';
 
 const rootStyle = {
   height: '100%',
 };
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.params = json();
 root.render(
   <React.StrictMode>
     <App />

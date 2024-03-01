@@ -9,6 +9,7 @@ import adminRouter from './routes/admin_routes';
 import ext_participantRouter from './routes/ext_participant_routes';
 import organizerRouter from './routes/organizer_routes';
 import partRouter from './routes/part_routes';
+import searchRouter from './routes/search_routes';
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use("/admins", adminRouter);
 app.use("/ext_part", ext_participantRouter);
 app.use("/parts", partRouter);
 app.use("/orgs", organizerRouter);
+app.use("/search", searchRouter);
 
 // running sever
 const port = process.env.PORT || 5001;
