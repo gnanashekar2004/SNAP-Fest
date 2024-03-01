@@ -219,3 +219,38 @@ export const loginOrg = async(req, res, next)=>{
     }
     return res.status(200).json(result.rows);
 };
+
+
+export const getEventsOrganized = async(req, res, next)=>{
+    const client = await pool.connect();
+    const id = req.params.id;
+    let result;
+    try {
+        await client.query('BEGIN');
+        let queryText = `select * from orgs where orgs.id=${id}`;
+        result = await client.query(queryText);
+
+        if (result.rows.length == 0){
+            // no such organizer
+            return res.status(404).json({message:"organizer not found"});
+        }
+        queryText = `select events.id, events.name, events.location, events.description, events.dateofevent from events 
+        join event_orgs on events.id=event_orgs.eventid
+        join orgs on event_orgs.orgid=orgs.id
+        where orgs.id=${id}`;
+        result = await client.query(queryText);
+        
+        await client.query('COMMIT');
+    } catch (e) {
+        await client.query('ROLLBACK');
+        console.log(e);
+    } finally {
+        client.release();
+    }
+    if (!result){
+        return res.status(404).json({message:"db error occured"});
+    }
+    else {
+        return res.status(200).json(result.rows);
+    }
+};
