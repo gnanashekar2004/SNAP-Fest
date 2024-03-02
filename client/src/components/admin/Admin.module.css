@@ -1,0 +1,15 @@
+.gridbox{
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    justify-content: space-around;
+
+}
+
+.row{
+    display: flex;
+    justify-content: space-around;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+

@@ -1,26 +1,36 @@
-import react, { useEffect, useState } from "react";
-import { getAllEVents } from "../../api_helpers/api_helpers";
-import { Box, Typography } from "@mui/material";
+import react from "react";
+import { Routes, Route, Link } from "react-router-dom";
+
 import Navbar from "../navbar/Navbar";
-import Event from "../event/Event";
+import AdminCard from "./AdminCard";
+import styles from "./Admin.module.css";
+import StudentPage from "./StudentPage";
+import ParticipantPage from "./ParticipantPage";
+import OrganiserPage from "./OrganiserPage";
+import EventPage from "./EventPage";
 
 function Admin(){
-    const [events, setevents] = useState([]);
-    useEffect(()=>{
-        getAllEVents().then((data)=>setevents(data))
-        .catch((err)=>console.log(err));
-    }, [events]);
-    console.log(events);
-    
     return (
         <>
-        <Navbar prop="Profile"/>
-        <Box margin={"auto"} marginTop={0}>
-            <Typography variant={"h4"} width={"100%"} bgcolor="lightgreen" textAlign={"center"} padding={2}>All Events</Typography>
-            <Box width={"80%"} margin="auto" display={"flex"} justifyContent="center" flexWrap={"wrap"}>
-                {events && events.map((event, index)=><Event id={event.id} name={event.name} date={event.dateofevent} location={event.location} desc={event.description} button1="register" button2="winners" button3="volunteer"/>)}
-            </Box> 
-        </Box>
+            <Navbar prop="Profile" />
+            <div className={styles.gridbox}>
+                <div className={styles.row}>
+                <Link to="/admins/participants" style={{ textDecoration: 'none' }}>
+                    <AdminCard name="Participants" color="rgb(255, 0, 0 , 0.5)" />
+                </Link>
+                <Link to="/admins/students" style={{ textDecoration: 'none' }}>
+                    <AdminCard name="Students" color="rgb(0, 0, 255,0.5)" />
+                </Link>
+                </div>
+                <div className={styles.row}>
+                <Link to="/admins/organisers" style={{ textDecoration: 'none' }}>
+                    <AdminCard name="Organisers" color="rgb(0, 255, 0, 0.5)" />
+                </Link>
+                <Link to="/admins/events" style={{ textDecoration: 'none' }}>
+                    <AdminCard name="Events" color="rgb(172, 172, 134, 0.5)" />
+                </Link>
+                </div>
+            </div>
         </>
     );
 }
