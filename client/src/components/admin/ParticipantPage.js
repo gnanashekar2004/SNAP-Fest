@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from "../navbar/Navbar";
 import User from "../user/User";
+import { getAllExt_parts } from '../../api_helpers/api_helpers';
+import { useNavigate } from 'react-router-dom';
 
 const customStyle = {
     paddingLeft:"10%",
@@ -19,17 +21,25 @@ const buttonStyle= {
 }
 
 function ParticipantPage (){
+
+    const [ext_parts, setext_parts] = useState([]);
+    useEffect(()=>{
+        getAllExt_parts().then((data)=>setext_parts(data))
+        .catch((err)=>console.log(err));
+    }, [ext_parts]);
+    console.log(ext_parts);
+
+    let navigate = useNavigate();
+
     return (
         <>
             <Navbar prop="Profile"/>
             <div style={customStyle}>
-                <User id="1" name="ParticipantName" button="Delete"/>
-                <User id="1" name="ParticipantName" button="Delete"/>
-                <User id="1" name="ParticipantName" button="Delete"/>
-                <User id="1" name="ParticipantName" button="Delete"/>
-                <User id="1" name="ParticipantName" button="Delete"/>
+                { ext_parts && ext_parts.map((ext_part, index)=>
+                    <User id={ext_part.id} roll="" hall="" name={ext_part.name} type={1} email={ext_part.email} button1={"delete"}/>
+                )}
             </div>
-            <button className="btn btn-success" style={buttonStyle}>Add a new Participant</button>
+            <button className="btn btn-success" onClick={()=>navigate("/add/participants")}  style={buttonStyle}>Add a new Participant</button>
         </>
     );
 }

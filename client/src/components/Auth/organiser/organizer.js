@@ -11,6 +11,10 @@ const Organizer_auth=()=>{
             orgloginhandle(data)
                 .then((res)=>{
                     localStorage.setItem('org_id', res[0].id);
+                    localStorage.setItem('user_type', 3);
+                    localStorage.removeItem('ext_part_id');
+                    localStorage.removeItem('student_id');
+                    localStorage.removeItem('admin_id');
                     navigate("/orgs/home");
                 })
                 .catch((err)=>console.log(err));
@@ -19,6 +23,10 @@ const Organizer_auth=()=>{
             orgsignuphandle(data)
                 .then((res)=>{
                     localStorage.setItem('org_id', res.id);
+                    localStorage.setItem('user_type', 3);
+                    localStorage.removeItem('ext_part_id');
+                    localStorage.removeItem('student_id');
+                    localStorage.removeItem('admin_id');
                     navigate("/orgs/home");
                 })
                 .catch((err)=>console.log(err));

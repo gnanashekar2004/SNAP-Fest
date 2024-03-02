@@ -90,6 +90,7 @@ export const createOrganizer = async(req, res, next)=>{
         email:email,
         password:password
     }
+    result = `success`;
     return res.status(200).json(result);
 };
 
@@ -135,6 +136,43 @@ export const organizeEvent = async(req, res, next)=>{
     return res.status(200).json(result);
 }
 
+export const deorganizeEvent = async(req, res, next)=>{
+    const { orgid, eventid} = req.body;
+    console.log("req", req.body);
+    let result;
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+        if (orgid==undefined  || eventid==undefined){
+            return res.status(400).json({message:"undefined data given"});
+        }
+        let queryText = `select * from event_orgs where event_orgs.orgid=${orgid} and event_orgs.eventid=${eventid}`;
+        result = await client.query(queryText);
+
+        if (result.rows.length == 0){
+            // no such participant
+            return res.status(404).json({message:"organizer not found"});
+        }
+        else {
+            queryText = `delete from event_orgs where event_orgs.eventid=${eventid} and event_orgs.orgid=${orgid}`;
+            result = await client.query(queryText);
+        }
+        await client.query('COMMIT');
+    } catch (e) {
+        await client.query('ROLLBACK');
+        console.log(e);
+    } finally {
+        client.release();
+    }
+    if (!result){
+        return res.status(404).json({message:"db error occured"});
+    }
+    else {
+        result = req.body;
+        return res.status(200).json(result);
+    }
+};
+
 export const declareWinners = async(req, res, next)=>{
     const { pid, eventid, position, orgid } = req.body;
     const client = await pool.connect();
@@ -159,7 +197,7 @@ export const declareWinners = async(req, res, next)=>{
         result = await client.query(queryText);
         if (result.rows.length != 0){
             // already exists
-            return res.status(500).json({message:"Already exists"});
+            return res.status(500).json({message:"Already a position is given "});
         }
         else {
             // ok
@@ -167,7 +205,7 @@ export const declareWinners = async(req, res, next)=>{
             result = await client.query(queryText);
             if (result.rows.length != 0){
                 // already exists
-                return res.status(500).json({message:"Already exists"});
+                return res.status(500).json({message:"Already position given to other participants"});
             }
             else {
                 queryText = `insert into event_winners(eventid, pid, position) values(${eventid}, ${pid}, ${position})`;

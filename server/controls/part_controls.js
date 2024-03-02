@@ -24,6 +24,13 @@ export const registerForEvent = async(req, res, next)=>{
                 return res.status(404).json({message:"event not found"});
             }
             else {
+                queryText = `select * from event_parts where eventid=${eventid} and pid=${pid}`;
+                result = await client.query(queryText);
+
+                if (result.rows.length != 0){
+                    // already exist
+                    return res.status(350).json({message:"Already registered"});
+                }
                 queryText = `insert into event_parts(eventid, pid) values (${eventid}, ${pid})`;
                 result = await client.query(queryText);
             }
@@ -39,13 +46,14 @@ export const registerForEvent = async(req, res, next)=>{
         return res.status(404).json({message:"db error occured"});
     }
     else {
-        result = `${pid}-${eventid}`;
+        result = req.body;
         return res.status(200).json(result);
     }
 };
 
 export const DeregisterForEvent = async(req, res, next)=>{
     const { pid, eventid} = req.body;
+    console.log("req", req.body);
     let result;
     const client = await pool.connect();
     try {
@@ -120,7 +128,7 @@ export const getEventsParticipated = async(req, res, next)=>{
             // no such participant
             return res.status(404).json({message:"participant not found"});
         }
-        queryText = `select * from events 
+        queryText = `select events.id, events.name, events.dateofevent, events.location, events.description from events 
         join event_parts on events.id=event_parts.eventid
         join part on event_parts.pid=part.id
         where part.id=${id}`;

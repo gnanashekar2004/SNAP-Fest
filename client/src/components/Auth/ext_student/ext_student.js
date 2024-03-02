@@ -11,6 +11,10 @@ const Participant_auth=()=>{
             extstdloginhandle(data)
                 .then((res)=>{
                     localStorage.setItem('ext_part_id', res[0].id);
+                    localStorage.setItem('user_type', 1);
+                    localStorage.removeItem('admin_id');
+                    localStorage.removeItem('student_id');
+                    localStorage.removeItem('org_id');
                     navigate("/ext_part/home");
                 })
                 .catch((err)=>console.log(err));
@@ -19,6 +23,10 @@ const Participant_auth=()=>{
             extstdsignuphandle(data)
                 .then((res)=>{
                     localStorage.setItem('ext_part_id', res.id);
+                    localStorage.setItem('user_type', 1);
+                    localStorage.removeItem('admin_id');
+                    localStorage.removeItem('student_id');
+                    localStorage.removeItem('org_id');
                     navigate("/ext_part/home");
                 })
                 .catch((err)=>console.log(err));

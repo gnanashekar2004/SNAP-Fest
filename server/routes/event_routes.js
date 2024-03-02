@@ -8,8 +8,9 @@ eventRouter.get("/volunteers/:id", getEventVolunteers);
 eventRouter.get("/winners/:id", getEventWinners);
 eventRouter.get("/participants/:id", getEventParticipants);
 eventRouter.get("/:id", getEventByID);
-eventRouter.delete("/", deleteEvent);
+
 eventRouter.post("/", addEvent);
+eventRouter.post("/delete", deleteEvent);
 
 
 export default eventRouter;

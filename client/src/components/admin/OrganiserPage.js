@@ -1,6 +1,8 @@
 import react, { useEffect, useState } from "react";
 import Navbar from "../navbar/Navbar";
 import User from "../user/User";
+import { getAllOrgs } from "../../api_helpers/api_helpers";
+import { useNavigate } from "react-router-dom";
 
 const customStyle = {
     paddingLeft:"10%",
@@ -19,17 +21,24 @@ const buttonStyle= {
 }
 
 function OrganiserPage (){
+    const [orgs, setorgs] = useState([]);
+    useEffect(()=>{
+        getAllOrgs().then((data)=>setorgs(data))
+        .catch((err)=>console.log(err));
+    }, [orgs]);
+    console.log(orgs);
+
+    let navigate = useNavigate();
+
     return (
         <>
             <Navbar prop="Profile"/>
             <div style={customStyle}>
-                <User id="1" name="OrganiserName" button="Delete"/>
-                <User id="1" name="OrganiserName" button="Delete"/>
-                <User id="1" name="OrganiserName" button="Delete"/>
-                <User id="1" name="OrganiserName" button="Delete"/>
-                <User id="1" name="OrganiserName" button="Delete"/>
+                { orgs && orgs.map((org, index)=>
+                    <User id={org.id} name={org.name} type={3} email={org.email} button1={"delete"}/>
+                )}
             </div>
-            <button className="btn btn-success" style={buttonStyle}>Add a new Participant</button>
+            <button className="btn btn-success" onClick={()=>navigate("/add/orgs")} style={buttonStyle}>Add a new Organizer</button>
         </>
     );
 }
