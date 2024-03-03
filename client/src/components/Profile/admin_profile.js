@@ -47,7 +47,7 @@ const AdminProfilePage = () => {
               marginBottom: '16px',
             }}
           >
-            AU
+            ADMIN
           </Avatar>
         </Grid>
         <Grid item>

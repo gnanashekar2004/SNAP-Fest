@@ -47,6 +47,19 @@ export const getAllExt_parts = async()=>{
     return data;
 };
 
+// get accom
+export const getAccom = async(id)=>{
+    const res = await axios.get(`/ext_part/accom/${id}`)
+    .catch((err)=>console.log(err));
+    
+    if((res.status !== 200)) {
+        return console.log("No Data");
+    }
+    console.log(res);
+    const data = await res.data[0];
+    return data;
+};
+
 export const getEventsOrganized = async(id)=>{
     const res = await axios.get(`/orgs/events/${id}`)
     .catch((err)=>console.log(err));

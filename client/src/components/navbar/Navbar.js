@@ -30,7 +30,7 @@ function Navbar({prop}) {
     }
     else if (user_type == 4){
       // admin
-      navigate("admin/profile");
+      navigate("/admin/profile");
     }
     else {
       //
