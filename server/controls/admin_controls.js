@@ -215,6 +215,32 @@ export const declareWinnersByAdmin = async(req, res, next)=>{
     return res.status(200).json(result);
 };
 
+export const approveOrg = async(req, res, next)=>{
+    const {id} = req.body;
+    const client = await pool.connect();
+    let result;
+    try{
+        await client.query('BEGIN');
+        if (id == undefined){
+            return res.status(300).json({message:"undefined data given"});
+        }
+        let queryText = `update orgs set approved=1 where id=${id}`;
+        result = await client.query(queryText);
+
+        await client.query('COMMIT');
+    }catch(e){
+        await client.query('ROLLBACK');
+        console.log(e);
+    }
+    finally{
+        client.release();
+    }
+    if(!result){
+        return res.status(310).json({message:"invalid data"});
+    }
+    result = `${id}`;
+    return res.status(200).json(result);
+};
 
 // export const deleteStudentFromParticipant = async(req, res, next)=>{
 //     const {roll} = req.body;

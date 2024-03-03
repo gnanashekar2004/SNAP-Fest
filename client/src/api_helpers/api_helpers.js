@@ -24,6 +24,17 @@ export const getAllOrgs = async()=>{
     const data = await res.data;
     return data;
 };
+export const getAllWaitingOrgs = async()=>{
+    const res = await axios.get("/orgs/waiting/users")
+    .catch((err)=>console.log(err));
+    
+    if((res.status !== 200)) {
+        return console.log("No Data");
+    }
+    console.log(res);
+    const data = await res.data;
+    return data;
+};
 export const getAllStudents = async()=>{
     const res = await axios.get("/students")
     .catch((err)=>console.log(err));
@@ -59,6 +70,15 @@ export const getAllHalls = async()=>{
     return data;
 };
 
+export const approveOrg = async(values)=>{
+    console.log(values);
+    const res = await axios.post(`/admins/approve/orgs`, values).catch((err)=>{
+        console.log(err.response.data.message);
+        alert(err.response.data.message);
+    });
+    const resdata = await res.data;
+    return resdata;
+};
 // get accom
 export const getAccom = async(id)=>{
     console.log(`id = ${id}`);
@@ -80,6 +100,7 @@ export const getAccom = async(id)=>{
     }
     return data;
 };
+
 // set accom
 export const setAccom = async(values)=>{
     console.log(values);
@@ -278,7 +299,7 @@ export const studloginhandle = async(values)=>{
 
 export const orgloginhandle = async(values)=>{
     const res = await axios.put(`orgs/login`, values.inputs).catch((err)=>{
-        alert("invalid credentials");
+        alert(err.response.data.message);
         localStorage.removeItem("org_id");
     });
     if(res.status!==200){
