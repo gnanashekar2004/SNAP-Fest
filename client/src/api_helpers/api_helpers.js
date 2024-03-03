@@ -46,10 +46,23 @@ export const getAllExt_parts = async()=>{
     const data = await res.data;
     return data;
 };
+// get all halls
+export const getAllHalls = async()=>{
+    const res = await axios.get("/halls")
+    .catch((err)=>console.log(err));
+    
+    if((res.status !== 200)) {
+        return console.log("No Data");
+    }
+    console.log(res);
+    const data = await res.data;
+    return data;
+};
 
 // get accom
 export const getAccom = async(id)=>{
-    const res = await axios.get(`/ext_part/accom/${id}`)
+    console.log(`id = ${id}`);
+    const res = await axios.get(`/halls/accom/${id}`)
     .catch((err)=>console.log(err));
     
     if((res.status !== 200)) {
@@ -58,6 +71,16 @@ export const getAccom = async(id)=>{
     console.log(res);
     const data = await res.data[0];
     return data;
+};
+// set accom
+export const setAccom = async(values)=>{
+    console.log(values);
+    const res = await axios.post(`/ext_part/accom`, values).catch((err)=>{
+        console.log(err.response.data.message);
+        alert(err.response.data.message);
+    });
+    const resdata = await res.data;
+    return resdata;
 };
 
 export const getEventsOrganized = async(id)=>{

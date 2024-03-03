@@ -5,6 +5,7 @@ import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
 import { getAccom, getExtPartById } from '../../api_helpers/api_helpers';
 import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const ExtProfilePage = () => {
   const [userData, setUserData] = useState(null);
@@ -28,24 +29,28 @@ const ExtProfilePage = () => {
     hall:'',
     food:''
   });
-  useEffect(() => {
+
+
+  useEffect(()=>{
     getExtPartById(user_id).then((loggedInUserData)=>{
         setUserData(loggedInUserData);
     }).catch((err)=>console.log(err));
+  }, [pass]);
 
+  useEffect(() => {
     getAccom(user_id).then((loggedInAccomodation)=>{
         setAccomodation(loggedInAccomodation);
     }).catch((err)=>console.log(err));
-  }, [pass, Accomodation]);
-
+    console.log(user_id);
+  }, [Accomodation]);
   
   const handleShow = ()=>{
     pass = userData.password;
     alert(`password: ${pass}`);
   };
-  
+  let navigate = useNavigate();
   const handleChangeAccomodation = ()=>{
-    alert(`Nothing comes free\npay extraa fee for changing accomdation`);
+    navigate("/ext_part/profile/accomodation");
   };
   
 
@@ -94,7 +99,7 @@ const ExtProfilePage = () => {
             Your Accomodation
           </Typography>
           <Typography variant="body1" align="center">
-            Stay: {Accomodation.hall} Hall
+            Stay: {Accomodation.hall}
           </Typography>
           <Typography variant="body1" align="center">
             Food: {Accomodation.food}

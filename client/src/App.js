@@ -25,6 +25,7 @@ import ExtProfilePage from './components/Profile/ext_part_profile';
 import OrgProfilePage from './components/Profile/organizer_profile';
 import StudentProfilePage from './components/Profile/student_profile';
 import AdminProfilePage from './components/Profile/admin_profile';
+import AccommodationPage from './components/accmodation/change_accom';
 
 function App() {
   return (
@@ -59,6 +60,8 @@ function App() {
             <Route path="/student/profile" element={<StudentProfilePage />} />
             <Route path="/organizer/profile" element={<OrgProfilePage />} />
             <Route path="/admin/profile" element={<AdminProfilePage />} />
+
+            <Route path="/ext_part/profile/accomodation" element={<AccommodationPage />} />
         </Routes>
     </BrowserRouter>
   );

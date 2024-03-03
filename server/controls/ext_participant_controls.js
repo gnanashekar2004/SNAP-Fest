@@ -151,6 +151,7 @@ export const getAcc = async(req, res, next)=>{
         if (id==undefined){
             return res.status(400).json({message:"undefined data given"});
         }
+        console.log("i am here");
         let queryText = `select * from accomodation where accomodation.id = ${id}`;
         result = await client.query(queryText);
         if (result.rows.length == 0){
@@ -201,7 +202,7 @@ export const setAcc = async(req, res, next)=>{
         return res.status(404).json({message:"db error occured"});
     }
     else {
-        result = `${id}-${hall}-${food}`;
+        result = `success`;
         return res.status(200).json(result);
     }
 };
