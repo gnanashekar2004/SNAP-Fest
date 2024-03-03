@@ -3,21 +3,21 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
-import { getExtPartById } from '../../api_helpers/api_helpers';
+import { getOrgById } from '../../api_helpers/api_helpers';
 
-const ExtProfilePage = () => {
+const OrganizerProfilePage = () => {
   const [userData, setUserData] = useState(null);
 
   let pass = "****";
   let loggedInUserData = {
     id: 1,
-    name: 'extternal participant',
-    email: 'external@example.com',
+    name: 'Organizer User',
+    email: 'organizer@example.com',
     password: '********',
   };
-  let user_id = Number(localStorage.getItem('ext_part_id'));
+  let user_id = Number(localStorage.getItem('org_id'));
   useEffect(() => {
-    getExtPartById(user_id).then((loggedInUserData)=>{
+    getOrgById(user_id).then((loggedInUserData)=>{
         setUserData(loggedInUserData);
     }).catch((err)=>console.log(err));
   }, [pass, loggedInUserData]);
@@ -27,8 +27,6 @@ const ExtProfilePage = () => {
     alert(`password: ${pass}`);
   };
   
-
-
   return (
     <Paper
       style={{
@@ -49,7 +47,7 @@ const ExtProfilePage = () => {
               marginBottom: '16px',
             }}
           >
-            EP
+            OU
           </Avatar>
         </Grid>
         <Grid item>
@@ -73,4 +71,4 @@ const ExtProfilePage = () => {
   );
 };
 
-export default ExtProfilePage;
+export default OrganizerProfilePage;

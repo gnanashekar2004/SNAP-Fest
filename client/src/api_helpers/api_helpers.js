@@ -350,3 +350,41 @@ export const addExtPart = async(values)=>{
     const resdata = await res.data;
     return resdata;
 }
+
+// get users by id
+export const getExtPartById = async(id)=>{
+
+    const res = await axios.get(`ext_part/${id}`).catch((err)=>{
+        console.log(err.response.data.message);
+        alert(err.response.data.message);
+    });
+    const resdata = await res.data[0];
+    return resdata;
+}
+export const getStudentById = async(id)=>{
+
+    const res = await axios.get(`students/${id}`).catch((err)=>{
+        console.log(err.response.data.message);
+        alert(err.response.data.message);
+    });
+    const resdata = await res.data[0];
+    return resdata;
+}
+export const getOrgById = async(id)=>{
+
+    const res = await axios.get(`orgs/${id}`).catch((err)=>{
+        console.log(err.response.data.message);
+        alert(err.response.data.message);
+    });
+    const resdata = await res.data[0];
+    return resdata;
+}
+export const getAdminById = async(id)=>{
+
+    const res = await axios.get(`admins/${id}`).catch((err)=>{
+        console.log(err.response.data.message);
+        alert(err.response.data.message);
+    });
+    const resdata = await res.data[0];
+    return resdata;
+}

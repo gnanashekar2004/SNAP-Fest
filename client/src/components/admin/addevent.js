@@ -38,7 +38,9 @@ const AddEvent = ()=>{
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
+    <h4 style={{alignContent:'center'}}>Add Event</h4>
+    <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }} onSubmit={handleSubmit}>
       <label>
         Event id:
         <input
@@ -96,6 +98,7 @@ const AddEvent = ()=>{
       <br />
       <button type="submit">Submit</button>
     </form>
+    </>
   );
 };
 

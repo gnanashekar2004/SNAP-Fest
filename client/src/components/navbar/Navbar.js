@@ -13,6 +13,30 @@ function Navbar({prop}) {
     localStorage.setItem('user_type', 0);
     navigate("/");
   }
+  let navigte = useNavigate();
+  const handleProfile = ()=>{
+    let user_type = Number(localStorage.getItem('user_type'));
+    if (user_type == 1){
+      // ext_part
+      navigate("/ext_part/profile");
+    }
+    else if (user_type == 2){
+      // Student
+      navigate("/student/profile");
+    }
+    else if (user_type == 3){
+      // organizer
+      navigate("/organizer/profile");
+    }
+    else if (user_type == 4){
+      // admin
+      navigate("admin/profile");
+    }
+    else {
+      //
+
+    }
+  }
   return (
     <>
       <nav className="navbar sticky-top" style={{ backgroundColor: "#e3f2fd" }}>
@@ -30,7 +54,7 @@ function Navbar({prop}) {
             <p className={styles.mainTitle}> SNAP 2024</p>
           </div>
           <div className={styles.navLinks}>
-            <button className={styles.buttonStyle}>{prop}</button>
+            <button onClick={()=>handleProfile()} className={styles.buttonStyle}>{prop}</button>
             <button className="btn btn-outline-success" type="submit" onClick={handle_logout}>
               Log Out
             </button>
