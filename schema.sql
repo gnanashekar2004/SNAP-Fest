@@ -206,7 +206,8 @@ create table orgs(
 	name varchar(255),
 	email varchar(255),
 	password varchar(255),
-	primary key (id)
+	primary key (id),
+	approved int default 0
 );
 create table ext_part(
 	id int,
