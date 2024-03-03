@@ -10,6 +10,10 @@ const Admin_auth=()=>{
         admloginhandle(data)
             .then((res)=>{
                 localStorage.setItem('admin_id', res[0].id);
+                localStorage.setItem('user_type', 4);
+                localStorage.removeItem('ext_part_id');
+                localStorage.removeItem('student_id');
+                localStorage.removeItem('org_id');
                 navigate("/admin/home");
             })
             .catch((err)=>console.log(err));

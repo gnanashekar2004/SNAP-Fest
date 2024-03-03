@@ -52,7 +52,7 @@ export const getEventVolunteers = async(req, res, next) => {
     let result;
     try{
         await client.query('BEGIN');
-        let queryText = `select students.id, students.name from students 
+        let queryText = `select students.id, students.name, students.email from students 
         join event_volunteers on students.id=event_volunteers.studentid
         where event_volunteers.eventid=${eventid}`;
         result = await client.query(queryText);
@@ -77,7 +77,7 @@ export const getEventWinners = async(req, res, next) => {
     let result;
     try{
         await client.query('BEGIN');
-        let queryText = `select part.name from part
+        let queryText = `select part.name, event_winners.pid, event_winners.position from part
         join event_winners on part.id=event_winners.pid
         where event_winners.eventid=${eventid}`;
         result = await client.query(queryText);

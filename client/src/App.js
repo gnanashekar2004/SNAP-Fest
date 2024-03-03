@@ -10,12 +10,17 @@ import ParticipantPage from './components/admin/ParticipantPage';
 import StudentPage from './components/admin/StudentPage';
 import OrganiserPage from './components/admin/OrganiserPage';
 import EventPage from './components/admin/EventPage';
+import AddEvent from './components/admin/addevent';
 
 import './App.css';
 import Student_auth from './components/Auth/student/student';
 import Organizer_auth from './components/Auth/organiser/organizer';
 import Participant_auth from './components/Auth/ext_student/ext_student';
 import Admin_auth from './components/Auth/admin/admin';
+import Event_winners from './components/admin/Event_winners';
+import AddOrg from './components/admin/addorg';
+import AddExtPart from './components/admin/addextprt';
+import AddStudent from './components/admin/addstudent';
 
 function App() {
   return (
@@ -38,6 +43,12 @@ function App() {
             <Route path="/admins/students" element={<StudentPage />} />
             <Route path="/admins/organisers" element={<OrganiserPage />} />
             <Route path="/admins/events" element={<EventPage />} />
+            <Route path="/add/participants" element={<AddExtPart />} />
+            <Route path="/add/events" element={<AddEvent />} />
+            <Route path="/add/orgs" element={<AddOrg />} />
+            <Route path="/add/students" element={<AddStudent />} />
+
+            <Route path="/orgs/event_winners" element={<Event_winners />} />
         </Routes>
     </BrowserRouter>
   );

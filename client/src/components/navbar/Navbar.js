@@ -10,6 +10,7 @@ function Navbar({prop}) {
     localStorage.removeItem('admin_id');
     localStorage.removeItem('ext_part_id');
     localStorage.removeItem('org_id');
+    localStorage.setItem('user_type', 0);
     navigate("/");
   }
   return (

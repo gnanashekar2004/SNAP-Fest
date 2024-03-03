@@ -10,6 +10,10 @@ const Student_auth=()=>{
         studloginhandle(data)
             .then((res)=>{
                 localStorage.setItem('student_id', res[0].id);
+                localStorage.setItem('user_type', 2);
+                localStorage.removeItem('ext_part_id');
+                localStorage.removeItem('admin_id');
+                localStorage.removeItem('org_id');
                 navigate("/students/home");
             })
             .catch((err)=>console.log(err));
