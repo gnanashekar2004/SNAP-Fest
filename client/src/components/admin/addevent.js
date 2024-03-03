@@ -43,7 +43,7 @@ const AddEvent = ()=>{
     console.log('Form submitted:', formData);
 
     addEvent(formData).then((data)=>{
-        alert(data);
+        alert(`success`);
         navigate("/admins/events");
     }).catch((err)=>console.log(err));
     // Reset form after submission

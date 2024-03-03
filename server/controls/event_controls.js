@@ -153,7 +153,7 @@ export const addEvent = async(req, res, next)=>{
     if(!result){
         return res.status(310).json({message:"Invalid data"});
     }
-    result = `success`;
+    result = req.body;
     return res.status(200).json(result);
 };
 

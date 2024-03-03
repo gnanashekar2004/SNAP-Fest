@@ -49,7 +49,7 @@ function Navbar({prop}) {
     }
     else if (user_type == 3){
       // organizer
-      navigate("/organizer/home");
+      navigate("/orgs/home");
     }
     else if (user_type == 4){
       // admin
