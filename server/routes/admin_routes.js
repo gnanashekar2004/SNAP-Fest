@@ -1,5 +1,5 @@
 import express from 'express';
-import { declareWinnersByAdmin, deleteExtParticipant, deleteOrganizer, deleteStudent, getAdminByID, getAllAdmins, loginAdmin } from '../controls/admin_controls';
+import { approveOrg, declareWinnersByAdmin, deleteExtParticipant, deleteOrganizer, deleteStudent, getAdminByID, getAllAdmins, loginAdmin } from '../controls/admin_controls';
 
 const adminRouter = express.Router();
 
@@ -10,4 +10,5 @@ adminRouter.post("/organizer", deleteOrganizer);
 adminRouter.post("/student", deleteStudent);
 adminRouter.post("/ext_part", deleteExtParticipant);
 adminRouter.put("/winner", declareWinnersByAdmin);
+adminRouter.post("/approve/orgs", approveOrg);
 export default adminRouter;

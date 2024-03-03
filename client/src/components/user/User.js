@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './User.module.css';
-import { declareWinners, deleteExt_part, deleteOrganizer, deleteStudent } from '../../api_helpers/api_helpers';
+import { approveOrg, declareWinners, deleteExt_part, deleteOrganizer, deleteStudent } from '../../api_helpers/api_helpers';
 
 function User({id,name, hall, roll, type, email, button1, button2, button3}){
     
@@ -32,6 +32,15 @@ function User({id,name, hall, roll, type, email, button1, button2, button3}){
             let eventid = Number(localStorage.getItem('eventid'));
             declareWinners({pid:id, eventid:eventid, position:b, orgid: org_id}).then((data)=>{
                 alert(`${name} got position ${b}`);
+            })
+            .catch((err)=>console.log(err));
+        }
+        else if (type == 5){
+            let input = {
+                id: id
+            }
+            approveOrg(input).then((data)=>{
+                alert(`${id} organizer got approved`);
             })
             .catch((err)=>console.log(err));
         }

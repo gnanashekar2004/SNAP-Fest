@@ -5,7 +5,7 @@ export const getAllOrganizers = async(req, res, next)=>{
     let result;
     try {
         await client.query('BEGIN');
-        let queryText = 'select * from orgs';
+        let queryText = 'select * from orgs where approved=1';
         result = await client.query(queryText);
         
         await client.query('COMMIT');
@@ -22,7 +22,28 @@ export const getAllOrganizers = async(req, res, next)=>{
         return res.status(200).json(result.rows);
     }
 };
-
+export const getAllWaitingOrgs = async(req, res, next)=>{
+    const client = await pool.connect();
+    let result;
+    try {
+        await client.query('BEGIN');
+        let queryText = 'select * from orgs where approved=0';
+        result = await client.query(queryText);
+        
+        await client.query('COMMIT');
+    } catch (e) {
+        await client.query('ROLLBACK');
+        console.log(e);
+    } finally {
+        client.release();
+    }
+    if (!result){
+        return res.status(404).json({message:"db error occured"});
+    }
+    else {
+        return res.status(200).json(result.rows);
+    }
+};
 export const getOrganizerByID = async(req, res, next) => {
     const id = req.params.id;
     const client = await pool.connect();
@@ -246,6 +267,13 @@ export const loginOrg = async(req, res, next)=>{
         if (result.rows[0].password != password){
             // password incorrect
             return res.status(351).json({message:"wrong password"});
+        }
+        
+        queryText = `select * from orgs where orgs.email='${email}' and orgs.approved=1`;
+        result = await client.query(queryText);
+
+        if (result.rows.length == 0){
+            return res.status(352).json({message:"Not yet approved by admin"});
         }
 
         await client.query('COMMIT');
