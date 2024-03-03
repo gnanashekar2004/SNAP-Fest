@@ -36,7 +36,8 @@ const AddStudent = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
+    <form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }} onSubmit={handleSubmit}>
       <label>
         name:
         <input
@@ -95,6 +96,7 @@ const AddStudent = () => {
       
       <button type="submit">Submit</button>
     </form>
+    </>
   );
 };
 

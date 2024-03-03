@@ -3,21 +3,23 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
-import { getExtPartById } from '../../api_helpers/api_helpers';
+import { getStudentById } from '../../api_helpers/api_helpers';
 
-const ExtProfilePage = () => {
+const StudentProfilePage = () => {
   const [userData, setUserData] = useState(null);
 
   let pass = "****";
   let loggedInUserData = {
     id: 1,
-    name: 'extternal participant',
-    email: 'external@example.com',
+    name: 'Student User',
+    roll: 'roll',
+    hall: 'hall',
+    email: 'student@example.com',
     password: '********',
   };
-  let user_id = Number(localStorage.getItem('ext_part_id'));
+  let user_id = Number(localStorage.getItem('student_id'));
   useEffect(() => {
-    getExtPartById(user_id).then((loggedInUserData)=>{
+    getStudentById(user_id).then((loggedInUserData)=>{
         setUserData(loggedInUserData);
     }).catch((err)=>console.log(err));
   }, [pass, loggedInUserData]);
@@ -27,8 +29,6 @@ const ExtProfilePage = () => {
     alert(`password: ${pass}`);
   };
   
-
-
   return (
     <Paper
       style={{
@@ -49,7 +49,7 @@ const ExtProfilePage = () => {
               marginBottom: '16px',
             }}
           >
-            EP
+            SU
           </Avatar>
         </Grid>
         <Grid item>
@@ -60,6 +60,12 @@ const ExtProfilePage = () => {
         <Grid item>
           <Typography variant="body1" align="center">
             ID: {userData?.id}
+          </Typography>
+          <Typography variant="body1" align="center">
+            Roll: {userData?.roll}
+          </Typography>
+          <Typography variant="body1" align="center">
+            Hall: {userData?.hall}
           </Typography>
           <Typography variant="body1" align="center">
             Email: {userData?.email}
@@ -73,4 +79,4 @@ const ExtProfilePage = () => {
   );
 };
 
-export default ExtProfilePage;
+export default StudentProfilePage;
