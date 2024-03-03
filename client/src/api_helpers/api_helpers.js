@@ -69,7 +69,15 @@ export const getAccom = async(id)=>{
         return console.log("No Data");
     }
     console.log(res);
-    const data = await res.data[0];
+    
+    let data = await res.data[0];
+    if (res.data.length == 0){
+        data = {
+            id: id,
+            hall: "Accomodation not given",
+            food: "Accomodation not given"
+        }
+    }
     return data;
 };
 // set accom
