@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 import { getAccom, getExtPartById } from '../../api_helpers/api_helpers';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../navbar/Navbar';
 
 const ExtProfilePage = () => {
   const [userData, setUserData] = useState(null);
@@ -55,6 +56,8 @@ const ExtProfilePage = () => {
   
 
   return (
+    <>
+    <Navbar prop="" />
     <Paper
       style={{
         padding: '16px',
@@ -108,6 +111,7 @@ const ExtProfilePage = () => {
         <Button onClick={()=>handleChangeAccomodation()} >Change Accomodation</Button>
       </Grid>
     </Paper>
+    </>
   );
 };
 

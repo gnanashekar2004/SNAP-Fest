@@ -45,7 +45,7 @@ function Navbar({prop}) {
     }
     else if (user_type == 2){
       // Student
-      navigate("/student/home");
+      navigate("/students/home");
     }
     else if (user_type == 3){
       // organizer

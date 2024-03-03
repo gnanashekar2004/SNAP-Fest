@@ -4,6 +4,7 @@ import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
 import { getAdminById } from '../../api_helpers/api_helpers';
+import Navbar from '../navbar/Navbar';
 
 const AdminProfilePage = () => {
   const [userData, setUserData] = useState(null);
@@ -28,6 +29,8 @@ const AdminProfilePage = () => {
   };
   
   return (
+    <>
+    <Navbar prop="" />
     <Paper
       style={{
         padding: '16px',
@@ -68,6 +71,7 @@ const AdminProfilePage = () => {
         </Grid>
       </Grid>
     </Paper>
+    </>
   );
 };
 

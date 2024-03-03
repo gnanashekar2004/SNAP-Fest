@@ -4,6 +4,7 @@ import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
 import { getStudentById } from '../../api_helpers/api_helpers';
+import Navbar from '../navbar/Navbar';
 
 const StudentProfilePage = () => {
   const [userData, setUserData] = useState(null);
@@ -30,6 +31,8 @@ const StudentProfilePage = () => {
   };
   
   return (
+    <>
+    <Navbar prop="" />
     <Paper
       style={{
         padding: '16px',
@@ -76,6 +79,7 @@ const StudentProfilePage = () => {
         </Grid>
       </Grid>
     </Paper>
+    </>
   );
 };
 

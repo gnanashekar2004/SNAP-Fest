@@ -4,6 +4,7 @@ import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
 import { getOrgById } from '../../api_helpers/api_helpers';
+import Navbar from '../navbar/Navbar';
 
 const OrganizerProfilePage = () => {
   const [userData, setUserData] = useState(null);
@@ -28,6 +29,8 @@ const OrganizerProfilePage = () => {
   };
   
   return (
+    <>
+    <Navbar prop="" />
     <Paper
       style={{
         padding: '16px',
@@ -68,6 +71,7 @@ const OrganizerProfilePage = () => {
         </Grid>
       </Grid>
     </Paper>
+    </>
   );
 };
 
