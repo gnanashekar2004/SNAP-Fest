@@ -6,7 +6,16 @@ const customFont={
   margin: "0",
   display: "flex",
   alignItems: "center",
-  color: "grey"
+  color: "grey",
+  backgroundColor:"white",
+  borderRadius: "10px 0px 0px 10px",
+  paddingLeft: "15px"
+}
+
+const customFont2={
+  width: "76%" ,
+  borderRadius: "0px 10px 10px 0px", 
+  paddingLeft: "5px"
 }
 
 const AddEvent = ()=>{
@@ -59,7 +68,7 @@ const AddEvent = ()=>{
           className={styles.inputField}
           value={formData.id}
           onChange={handleChange}
-          style={{ width: "80%"}}
+          style={customFont2}
           required
         />
       </label>
