@@ -102,7 +102,6 @@ export const createParticipant = async(req, res, next)=>{
         password: password,
         college: college
     };
-    result = `success`;
     return res.status(200).json(result);
 };
 

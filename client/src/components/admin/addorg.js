@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { addOrg } from '../../api_helpers/api_helpers';
 import styles from './Forms.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const AddOrg = () => {
   const [formData, setFormData] = useState({
@@ -16,13 +17,14 @@ const AddOrg = () => {
       [name]: value
     }));
   };
-
+  let navigate = useNavigate();
   const handleSubmit = e => {
     e.preventDefault();
     // Handle form submission, e.g., send data to server
     console.log('Form submitted:', formData);
     addOrg(formData).then((data)=>{
-        alert(data);
+        alert(`success`);
+        navigate("/admins/orgs");
     }).catch((err)=>console.log(err));
     // Reset form after submission
     setFormData({

@@ -23,7 +23,7 @@ function Admin(){
                 </Link>
                 </div>
                 <div className={styles.row}>
-                <Link to="/admins/organisers" style={{ textDecoration: 'none' }}>
+                <Link to="/admins/orgs" style={{ textDecoration: 'none' }}>
                     <AdminCard name="Organisers" color="rgb(0, 255, 0, 0.5)" />
                 </Link>
                 <Link to="/admins/events" style={{ textDecoration: 'none' }}>

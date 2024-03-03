@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { addEvent } from '../../api_helpers/api_helpers';
 import styles from "./Forms.module.css";
+import { useNavigate } from 'react-router-dom';
 
 const customFont={
   margin: "0",
@@ -34,7 +35,7 @@ const AddEvent = ()=>{
       [name]: value
     }));
   };
-
+  let navigate = useNavigate();
   const handleSubmit = e => {
     e.preventDefault();
     // Handle form submission, e.g., send data to server
@@ -43,6 +44,7 @@ const AddEvent = ()=>{
 
     addEvent(formData).then((data)=>{
         alert(data);
+        navigate("/admins/events");
     }).catch((err)=>console.log(err));
     // Reset form after submission
     setFormData({

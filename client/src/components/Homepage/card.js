@@ -9,7 +9,7 @@ function Card({source, title , onClick}) {
     };
 
     return (
-    <div className="card" style={{width: "18rem", borderRadius: "15px"}} onClick={onClick}>
+    <div className="card" style={{width: "18rem", borderRadius: "15px", cursor: 'pointer'}} onClick={onClick}>
         <img src={source} class="card-img-top" alt={title} />
         <div className="card-body" style={style1}>
           <h3 className="card-text" style={{textAlign: "center" , color: "white"}}>{title}</h3>

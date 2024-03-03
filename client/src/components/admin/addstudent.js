@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {  addStudents } from '../../api_helpers/api_helpers';
 import styles from './Forms.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const AddStudent = () => {
   const [formData, setFormData] = useState({
@@ -18,13 +19,15 @@ const AddStudent = () => {
       [name]: value
     }));
   };
-
+  
+  let navigate = useNavigate();
   const handleSubmit = e => {
     e.preventDefault();
     // Handle form submission, e.g., send data to server
     console.log('Form submitted:', formData);
     addStudents(formData).then((data)=>{
-        alert(data);
+        alert(`success`);
+        navigate("/admins/students");
     }).catch((err)=>console.log(err));
     // Reset form after submission
     setFormData({

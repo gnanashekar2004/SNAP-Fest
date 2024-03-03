@@ -226,7 +226,6 @@ export const createStudent = async(req, res, next)=>{
         hall: hall,
         password:password
     }
-    result = `success`;
     return res.status(200).json(result);
 };
 

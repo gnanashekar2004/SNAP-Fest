@@ -90,7 +90,6 @@ export const createOrganizer = async(req, res, next)=>{
         email:email,
         password:password
     }
-    result = `success`;
     return res.status(200).json(result);
 };
 

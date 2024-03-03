@@ -46,7 +46,7 @@ function App() {
             <Route path="/admins" element = {<Admin />} />
             <Route path="/admins/participants" element={<ParticipantPage />} />
             <Route path="/admins/students" element={<StudentPage />} />
-            <Route path="/admins/organisers" element={<OrganiserPage />} />
+            <Route path="/admins/orgs" element={<OrganiserPage />} />
             <Route path="/admins/events" element={<EventPage />} />
 
             <Route path="/add/participants" element={<AddExtPart />} />
