@@ -217,7 +217,7 @@ export const declareWinners = async(req, res, next)=>{
         result = await client.query(queryText);
         if (result.rows.length != 0){
             // already exists
-            return res.status(500).json({message:"Already a position is given "});
+            return res.status(500).json({message:`Already ${result.rows[0].position} position is given to this participant`});
         }
         else {
             // ok
